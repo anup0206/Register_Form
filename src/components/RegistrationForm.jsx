@@ -51,6 +51,7 @@ const RegistrationForm = () => {
         resetForm();
     };
 
+
     return (
         <div className="max-w-lg mx-auto m-10 p-6 bg-white shadow-md rounded">
             <h2 className="text-2xl font-semibold mb-6 text-center">Register Form</h2>
@@ -61,151 +62,98 @@ const RegistrationForm = () => {
                 onSubmit={onSubmit}
             >
                 <Form>
-                    {/* Fullname */}
-                    <div className="mb-4">
-                        <label htmlFor="fullname" className="block text-sm font-medium text-gray-700">
-                            Full Name
-                        </label>
-                        <Field
-                            type="text"
-                            id="fullname"
-                            name="fullname"
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <ErrorMessage
-                            name="fullname"
-                            component="div"
-                            className="text-red-500 text-sm mt-1"
-                        />
-                    </div>
+                    {/* Define Fields */}
+                    {[
+                        {
+                            name: 'fullname',
+                            label: 'Full Name',
+                            type: 'text',
+                            placeholder: 'Enter your full name',
+                        },
+                        {
+                            name: 'email',
+                            label: 'Email',
+                            type: 'email',
+                            placeholder: 'Enter your email',
+                        },
+                        {
+                            name: 'phone',
+                            label: 'Phone',
+                            type: 'text',
+                            placeholder: 'Enter your phone number',
+                        },
+                        {
+                            name: 'dob',
+                            label: 'Date of Birth',
+                            type: 'date',
+                        },
+                        {
+                            name: 'password',
+                            label: 'Password',
+                            type: 'password',
+                            placeholder: 'Enter your password',
+                        },
+                        {
+                            name: 'address',
+                            label: 'Address',
+                            type: 'textarea',
+                            placeholder: 'Enter your address',
+                        },
+                    ].map((field) => (
+                        <div key={field.name} className="mb-4">
+                            <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">
+                                {field.label}
+                            </label>
 
-                    {/* Email */}
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                            Email
-                        </label>
-                        <Field
-                            type="email"
-                            id="email"
-                            name="email"
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <ErrorMessage
-                            name="email"
-                            component="div"
-                            className="text-red-500 text-sm mt-1"
-                        />
-                    </div>
+                            {field.type === 'textarea' ? (
+                                <Field
+                                    as="textarea"
+                                    id={field.name}
+                                    name={field.name}
+                                    rows="3"
+                                    placeholder={field.placeholder}
+                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            ) : (
+                                <Field
+                                    type={field.type}
+                                    id={field.name}
+                                    name={field.name}
+                                    placeholder={field.placeholder}
+                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                />
+                            )}
 
-                    {/* Phone */}
-                    <div className="mb-4">
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                            Phone
-                        </label>
-                        <Field
-                            type="text"
-                            id="phone"
-                            name="phone"
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <ErrorMessage
-                            name="phone"
-                            component="div"
-                            className="text-red-500 text-sm mt-1"
-                        />
-                    </div>
+                            <ErrorMessage
+                                name={field.name}
+                                component="div"
+                                className="text-red-500 text-sm mt-1"
+                            />
+                        </div>
+                    ))}
 
-                    {/* DOB */}
+                    {/* Gender Radio Buttons */}
                     <div className="mb-4">
-                        <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
-                            Date of Birth
-                        </label>
-                        <Field
-                            type="date"
-                            id="dob"
-                            name="dob"
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <ErrorMessage
-                            name="dob"
-                            component="div"
-                            className="text-red-500 text-sm mt-1"
-                        />
-                    </div>
-
-                    {/* Gender */}
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Gender
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
                         <div className="flex items-center space-x-4">
-                            <label className="inline-flex items-center">
-                                <Field
-                                    type="radio"
-                                    name="gender"
-                                    value="male"
-                                    className="form-radio"
-                                />
-                                <span className="ml-2">Male</span>
-                            </label>
-                            <label className="inline-flex items-center">
-                                <Field
-                                    type="radio"
-                                    name="gender"
-                                    value="female"
-                                    className="form-radio"
-                                />
-                                <span className="ml-2">Female</span>
-                            </label>
-                            <label className="inline-flex items-center">
-                                <Field
-                                    type="radio"
-                                    name="gender"
-                                    value="other"
-                                    className="form-radio"
-                                />
-                                <span className="ml-2">Other</span>
-                            </label>
+                            {[
+                                { value: 'male', label: 'Male' },
+                                { value: 'female', label: 'Female' },
+                                { value: 'other', label: 'Other' },
+                            ].map((option) => (
+                                <label key={option.value} className="inline-flex items-center">
+                                    <Field
+                                        type="radio"
+                                        name="gender"
+                                        value={option.value}
+                                        className="form-radio"
+                                    />
+                                    <span className="ml-2">{option.label}</span>
+                                </label>
+                            ))}
                         </div>
                         <ErrorMessage
                             name="gender"
-                            component="div"
-                            className="text-red-500 text-sm mt-1"
-                        />
-                    </div>
-
-                    {/* Password */}
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                            Password
-                        </label>
-                        <Field
-                            type="password"
-                            id="password"
-                            name="password"
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <ErrorMessage
-                            name="password"
-                            component="div"
-                            className="text-red-500 text-sm mt-1"
-                        />
-                    </div>
-
-                    {/* Address */}
-                    <div className="mb-4">
-                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                            Address
-                        </label>
-                        <Field
-                            as="textarea"
-                            id="address"
-                            name="address"
-                            rows="3"
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <ErrorMessage
-                            name="address"
                             component="div"
                             className="text-red-500 text-sm mt-1"
                         />
