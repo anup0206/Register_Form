@@ -33,6 +33,6 @@ This project demonstrates how to create a **form in React** using **Formik** for
 1. Clone the repository (if applicable):
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/anup0206/Register_Form.git
 
 
